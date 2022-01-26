@@ -1,4 +1,5 @@
 import cx from "classnames";
+import Link from "next/link";
 
 interface TableRowProps {
   title: string;
@@ -6,17 +7,17 @@ interface TableRowProps {
   category: string;
   item: number;
   price: number;
-  status: "Pending" | "Success" | "Failed"
+  status: "Pending" | "Success" | "Failed";
 }
 
 export default function TableRow(props: TableRowProps) {
   const { title, image, category, item, price, status } = props;
   const statusClass = cx({
     "float-start icon-status": true,
-    "pending": status === "Pending",
-    "success": status === "Success",
-    "failed": status === "Failed"
-  })
+    pending: status === "Pending",
+    success: status === "Success",
+    failed: status === "Failed",
+  });
 
   return (
     <tr data-category="pending" className="align-middle">
@@ -52,12 +53,9 @@ export default function TableRow(props: TableRowProps) {
         </div>
       </td>
       <td>
-        <a
-          href="/member/transactions-detail"
-          className="btn btn-status rounded-pill text-sm"
-        >
-          Details
-        </a>
+        <Link href="/member/transactions/detail">
+          <a className="btn btn-status rounded-pill text-sm">Details</a>
+        </Link>
       </td>
     </tr>
   );
